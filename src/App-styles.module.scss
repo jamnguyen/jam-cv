@@ -1,0 +1,10 @@
+@import './global-styles.scss';
+
+.container {
+  background: $background-dark-color;
+
+  .body {
+    margin-top: $header-offset;
+    min-height: 95vh;
+  }
+}

@@ -1,0 +1,74 @@
+@import './variables.scss';
+
+.mr-s {
+  margin-right: 1rem;
+}
+.mr-m {
+  margin-right: 2rem;
+}
+.mr-l {
+  margin-right: 3rem;
+}
+.mr-x {
+  margin-right: 5rem;
+}
+
+.ml-s {
+  margin-left: 1rem;
+}
+.ml-m {
+  margin-left: 2rem;
+}
+.ml-l {
+  margin-left: 3rem;
+}
+.ml-x {
+  margin-left: 5rem;
+}
+
+.mb-s {
+  margin-bottom: 1rem;
+}
+.mb-m {
+  margin-bottom: 2rem;
+}
+.mb-l {
+  margin-bottom: 3rem;
+}
+.mb-x {
+  margin-bottom: 5rem;
+}
+
+.mt-s {
+  margin-top: 1rem;
+}
+.mt-m {
+  margin-top: 2rem;
+}
+.mt-l {
+  margin-top: 3rem;
+}
+.mt-x {
+  margin-top: 5rem;
+}
+
+
+.page-container {
+  margin: 0 auto;
+  width: 135rem;
+}
+
+.link {
+  color: $primary-color;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+
+  &:visited {
+    color: $primary-dark-color;
+  }
+
+  &:hover, &:focus {
+    background: $primary-color;
+    color: black;
+  }
+}
