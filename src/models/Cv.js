@@ -1,8 +1,8 @@
 import EducationModel from './Education';
 import ExperienceModel from './Experience';
 import SkillModel from './Skill';
-import { Helper } from '../utilities';
-import { DATE_FORMAT } from '../Constant';
+import Helper from '../utilities/helper';
+import { DATE_FORMAT } from '../Constants';
 import ProjectModel from './Project';
 
 export default class CvModel {

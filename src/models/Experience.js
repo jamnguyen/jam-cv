@@ -1,4 +1,4 @@
-import { Helper } from '../utilities';
+import Helper from '../utilities/helper';
 
 export default class ExperienceModel {
   company;

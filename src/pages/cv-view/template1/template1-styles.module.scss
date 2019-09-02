@@ -1,0 +1,73 @@
+@import '../../../styles/global.scss';
+
+.heading1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.heading2 {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.fontBold {
+  font-weight: 700;
+}
+
+.fontSemiBold {
+  font-weight: 500;
+}
+
+.fontItalic {
+  font-style: italic;
+}
+
+.link {
+  color: $primary-dark-color;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+  position: relative;
+  
+  &:visited {
+    color: $primary-dark-color;
+  }
+
+  &:hover, &:focus {
+    color: black;
+    background: $primary-color;
+  }
+}
+
+.body {
+  display: flex;
+
+  .main {
+    width: 70%;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+}
+
+.cv {
+  background: white;
+  box-shadow: $box-shadow;
+  // border: 2px $primary-color solid;
+  border-radius: 5px;
+  padding: 10rem;
+  padding-bottom: 25rem;
+  position: relative;
+  min-height: 80vh;
+
+  &:after {
+    content: '';
+    background: $primary-color;
+    height: 4rem;
+    width: 100%;
+    bottom: 7rem;
+    left: 0;
+    position: absolute;
+  }
+}

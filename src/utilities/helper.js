@@ -1,4 +1,4 @@
-import { DATE_FORMAT, MONTH_NAME, MONTH_NAME_SHORT } from "../Constant";
+import { DATE_FORMAT, MONTH_NAME, MONTH_NAME_SHORT } from "../Constants";
 
 export default class Helper {
 

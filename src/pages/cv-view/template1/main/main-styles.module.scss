@@ -1,0 +1,92 @@
+@import '../../../../styles/global.scss';
+
+.main {
+  font-family: $template1-font-family;
+  padding-right: 4rem;
+  font-size: 1.8rem;
+
+  .paragraph {
+    text-align: justify;
+  }
+
+  .timeline {
+    .timelineItem {
+      display: flex;
+      align-items: flex-start;
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      
+      .timelineIcon {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        width: 30%;
+
+      }
+
+      .timelineContent {
+        padding-left: 2rem;
+        width: 70%;
+
+        .timelineOrganization {
+          font-weight: 3rem;
+          text-transform: uppercase;
+        }
+
+        .timelineTitle {
+          font-size: 1.6rem;
+        }
+
+        .timelineWork {
+          font-style: italic;
+        }
+      }
+    }
+  }
+
+  .project {
+    &Item {
+      padding-left: 1.5rem;
+
+      &:not(:last-child) {
+        margin-bottom: 3rem;
+      }
+
+      .projectTitle {
+        display: flex;
+        align-items: center;
+
+        .projectName {
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+
+        .projectTag {
+          font-size: 1.2rem;
+          background: $primary-color;
+          padding: 3px 5px;
+          border-radius: 3px;
+          margin-left: 1rem;
+        }
+      }
+
+      .projectInfo {
+
+        &Description {
+          font-size: 1.6rem;
+          margin-bottom: 1rem;
+        }
+
+        &Item {
+
+          &Label {
+          }
+          
+          &Content {
+
+          }
+        }
+      }
+    }
+  }
+}
