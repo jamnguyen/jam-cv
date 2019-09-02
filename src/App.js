@@ -1,13 +1,11 @@
 import React from 'react';
-import styles from './App-styles.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useUser } from './context/user-provider';
+import { AuthenticatedApp, UnauthenticatedApp } from './pages';
 
 const App = (props) => {
+  const user = useUser();
   return (
-    <div className={ styles.container }>
-      Haizzzz
-      <FontAwesomeIcon icon={['far', 'copyright']} />
-    </div>
+    user ? <AuthenticatedApp /> : <UnauthenticatedApp />
   );
 }
 
