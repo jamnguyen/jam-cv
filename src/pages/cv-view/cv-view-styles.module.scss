@@ -1,5 +1,11 @@
 @import '../../styles/global.scss';
 
 .container {
-  padding: 15rem 0;
+  padding-bottom: 15rem;
+}
+
+.message {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
 }

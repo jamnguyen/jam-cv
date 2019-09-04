@@ -1,0 +1,67 @@
+@import '../../styles/global.scss';
+
+.header {
+  // background: $header-background-color;
+  height: $header-height;
+  margin-bottom: 4rem;
+
+  &Container {
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 1rem;
+
+    .logo {
+      font-size: 3.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-size: 1.8rem;
+
+      .userAvatar {
+        width: 4rem;
+        clip-path: circle(50% at center);
+      }
+
+      &Item {
+        padding-bottom: .7rem;
+        border-bottom: transparent solid 2px;
+        transition: all .2s ease-in-out;
+        cursor: pointer;
+
+        &:not(:last-child) {
+          margin-right: 2rem;
+        }
+
+        &:hover, &:focus {
+          border-bottom: $primary-color solid 2px;
+        }
+
+        &Link {
+          color: white;          
+        }
+      }
+
+      &ItemHighlight {
+        border-bottom: $primary-color solid 2px;
+      }
+
+      &ItemBtn {
+        color: white;
+        font-size: 1.8rem;
+        transition: all .2s ease-in-out;
+
+        &:hover, &:focus {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}

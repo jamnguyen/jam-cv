@@ -2,17 +2,26 @@ import React from 'react';
 import styles from './cv-view-styles.module.scss';
 import CvTemplate1 from './template1/template1';
 import CvService from '../../utilities/cv-service';
+import { useSettings } from '../../context/settings-provider';
 
 const CvView = (props) => {
   const id = props.match.params.cvId;
-  const [cv, setCv] = React.useState(); 
-  const [isLoading, setIsLoading] = React.useState(false); 
+  const [cv, setCv] = React.useState();
+  const [loadingCV, setLoadingCv] = React.useState(true);
+  const { setIsLoading, headerVisibility, setHeaderVisibility } = useSettings();
 
   React.useEffect(() => {
+    setLoadingCv(true);
+    setIsLoading(true);   // For full page loading component
+    
     const getCv = async () => {
-      setIsLoading(true);
-      const result = await CvService.getCv(id);
-      setCv(result);
+      try {
+        const result = await CvService.getCv(id);
+        setCv(result);
+        if (!headerVisibility) setHeaderVisibility(true);
+      } catch (err) {
+      }
+      setLoadingCv(false);
       setIsLoading(false);
     }
 
@@ -28,8 +37,8 @@ const CvView = (props) => {
     // }
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (loadingCV) {
+    return null;
   }
 
   if (cv) {
@@ -39,7 +48,11 @@ const CvView = (props) => {
       </div>
     );
   } else {
-    return <div>Cannot load CV!</div>
+    return (
+      <div className={ `full-height-viewport flex-center` } >
+        <h1 className={ styles.message }>Cannot load data, please try another url or refresh the page.</h1>
+      </div>
+    );
   }
 
 }

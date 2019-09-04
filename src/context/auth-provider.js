@@ -1,19 +1,31 @@
 import React from 'react';
+import { firebase } from '../utilities/firebase';
+import { UserModel } from '../models';
 
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
   const [state, setState] = React.useState({loadingSignInInfo: true});
 
-  // Loading User login info
-  setInterval(() => { setState({...state, loadingSignInInfo: false, user: null}) }, 2000);
+  React.useEffect(() => {
+    // Loading User login info
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        setState({...state, user: new UserModel(user), loadingSignInInfo: false});
+      } else {
+        setState({...state, user: null, loadingSignInInfo: false});
+      }
+    });
+  }, []);
 
   if (state.loadingSignInInfo) {
-    return <div>Loading user info...</div>
+    return null;
   }
 
   const signIn = () => {};
-  const signOut = () => {};
+  const signOut = () => {
+    return firebase.auth().signOut();
+  };
 
   return (
     <AuthContext.Provider value={{user: state.user, signIn, signOut}} {...props} />
