@@ -5,13 +5,13 @@ import { SettingsProvider } from './settings-provider';
 
 const AppProviders = ({children}) => {
   return (
-    <AuthProvider>
-      <UserProvider>
-        <SettingsProvider>
+    <SettingsProvider>
+      <AuthProvider>
+        <UserProvider>
           { children }
-        </SettingsProvider>
-      </UserProvider>
-    </AuthProvider>
+        </UserProvider>
+      </AuthProvider>
+    </SettingsProvider>
   );
 }
 

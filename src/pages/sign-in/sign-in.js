@@ -5,10 +5,10 @@ import { FirebaseSignInButton } from '../../utilities/firebase';
 
 const SignIn = (props) => {
 
-  const { headerTitle, setHeaderTitle, headerVisibility, setHeaderVisibility } = useSettings();
+  const { showHeadFooter, setShowHeadFooter } = useSettings();
 
-  React.useEffect(() => {
-    if (headerVisibility) setHeaderVisibility(false);
+  React.useLayoutEffect(() => {
+    if (showHeadFooter) setShowHeadFooter(false);
   }, []);
 
   return (

@@ -1,13 +1,17 @@
 import React from 'react';
 import { firebase } from '../utilities/firebase';
 import { UserModel } from '../models';
+import { useSettings } from './settings-provider';
 
 const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
   const [state, setState] = React.useState({loadingSignInInfo: true});
+  const { setFirstTimeLoading } = useSettings();
 
   React.useEffect(() => {
+    setFirstTimeLoading(true);
+
     // Loading User login info
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -15,6 +19,7 @@ const AuthProvider = (props) => {
       } else {
         setState({...state, user: null, loadingSignInInfo: false});
       }
+      setTimeout(() => { setFirstTimeLoading(false) }, 1500);
     });
   }, []);
 

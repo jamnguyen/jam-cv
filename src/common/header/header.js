@@ -9,7 +9,7 @@ const Header = () => {
 
   const { signOut } = useAuth();
   const user = useUser();
-  const { headerTitle, headerVisibility } = useSettings();
+  const { headerTitle, showHeadFooter } = useSettings();
 
   const getSignInContent = () => {
     if (user) {
@@ -29,7 +29,7 @@ const Header = () => {
   }
 
   return (
-    headerVisibility ? (
+    showHeadFooter ? (
       <div className={ styles.header } >
         <div className={ `${styles.headerContainer} page-container` } >
           <div className={ styles.logo }>{ headerTitle }</div>

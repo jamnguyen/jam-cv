@@ -4,16 +4,21 @@ const SettingsContext = React.createContext();
 
 const SettingsProvider = (props) => {
   const [headerTitle, setHeaderTitle] = React.useState('Jam CV');
-  const [headerVisibility, setHeaderVisibility] = React.useState(false);
+  const [showHeadFooter, setShowHeadFooter] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [firstTimeLoading, setLoadingFirstTime] = React.useState(true);
+
+  const setFirstTimeLoading = (value) => { console.log('first time', value); setLoadingFirstTime(value) }
 
   const settingsValue = {
     headerTitle,
     setHeaderTitle,
-    headerVisibility,
-    setHeaderVisibility,
+    showHeadFooter,
+    setShowHeadFooter,
     isLoading,
-    setIsLoading
+    setIsLoading,
+    firstTimeLoading,
+    setFirstTimeLoading
   }
 
   return (

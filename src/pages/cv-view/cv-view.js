@@ -8,9 +8,9 @@ const CvView = (props) => {
   const id = props.match.params.cvId;
   const [cv, setCv] = React.useState();
   const [loadingCV, setLoadingCv] = React.useState(true);
-  const { setIsLoading, headerVisibility, setHeaderVisibility } = useSettings();
+  const { setIsLoading, showHeadFooter, setShowHeadFooter } = useSettings();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setLoadingCv(true);
     setIsLoading(true);   // For full page loading component
     
@@ -18,7 +18,7 @@ const CvView = (props) => {
       try {
         const result = await CvService.getCv(id);
         setCv(result);
-        if (!headerVisibility) setHeaderVisibility(true);
+        if (!showHeadFooter) setShowHeadFooter(true);
       } catch (err) {
       }
       setLoadingCv(false);

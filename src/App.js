@@ -5,7 +5,9 @@ import { AuthenticatedApp, UnauthenticatedApp } from './pages';
 import { LoadingCover } from './common';
 
 const App = (props) => {
+
   const user = useUser();
+
   return (
     <React.Fragment>
       <LoadingCover />
