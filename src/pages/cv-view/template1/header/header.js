@@ -80,7 +80,7 @@ const CvHeader = (props) => {
           <img alt="User Avatar" src={ cv.avatar } />
         </div>
         <div>
-          <h1 className={ commonStyles.heading1 }>{ `${cv.first_name} ${cv.last_name}` }</h1>
+          <h1 className={ commonStyles.heading1 }>{ `${cv.full_name}` }</h1>
           <h3 className={ `${styles.jobTitle}` }>{ cv.title }</h3>
         </div>
       </div>

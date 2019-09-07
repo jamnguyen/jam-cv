@@ -5,7 +5,6 @@ import CvMain from './main/main';
 import CvSidebar from './sidebar/sidebar';
 
 const CvTemplate1 = (props) => {
-  console.log('styles', styles);
 
   const { cv } = props;
   if (!cv) {

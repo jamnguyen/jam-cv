@@ -1,0 +1,7 @@
+@import '../../../styles/global.scss';
+
+.title {
+  font-family: $primary-font-family;
+  border-left: .5rem solid $primary-color;
+  padding-left: 1rem;
+}

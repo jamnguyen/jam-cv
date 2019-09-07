@@ -7,11 +7,9 @@ import { useSettings } from '../../context/settings-provider';
 const CvView = (props) => {
   const id = props.match.params.cvId;
   const [cv, setCv] = React.useState();
-  const [loadingCV, setLoadingCv] = React.useState(true);
-  const { setIsLoading, showHeadFooter, setShowHeadFooter } = useSettings();
+  const { isLoading, setIsLoading, showHeadFooter, setShowHeadFooter } = useSettings();
 
   React.useLayoutEffect(() => {
-    setLoadingCv(true);
     setIsLoading(true);   // For full page loading component
     
     const getCv = async () => {
@@ -21,7 +19,6 @@ const CvView = (props) => {
         if (!showHeadFooter) setShowHeadFooter(true);
       } catch (err) {
       }
-      setLoadingCv(false);
       setIsLoading(false);
     }
 
@@ -37,7 +34,7 @@ const CvView = (props) => {
     // }
   }
 
-  if (loadingCV) {
+  if (isLoading) {
     return null;
   }
 

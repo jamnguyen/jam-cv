@@ -10,21 +10,21 @@ export default class EducationModel {
     if (!data) {
       this.institution = '';
       this.major = '';
-      this.from = new Date('2001-05-27');
-      this.to = new Date();
+      this.from = '2001-05-27';
+      this.to = 'now';
     } else {
       this.institution = data.institution;
       this.major = data.major;
-      this.from = new Date(data.from);
-      this.to = data.to.toLowerCase() === 'now' ? 'Now' : new Date(data.to);
+      this.from = data.from;
+      this.to = data.to;
     }
   }
 
   get fromInFormat() {
-    return this.from instanceof Date ? Helper.formatDate(this.from) : this.from;
+    return Helper.formatDate(this.from);
   }
 
   get toInFormat() {
-    return this.to instanceof Date ? Helper.formatDate(this.to) : this.to;
+    return this.to.toLowerCase() === 'now' ? 'Now' : Helper.formatDate(this.to);
   }
 }

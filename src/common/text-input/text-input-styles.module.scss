@@ -1,0 +1,45 @@
+@import '../../styles/global.scss';
+
+.formGroup {
+
+  margin-bottom: 1.5rem;
+
+  input {
+    font-size: 1.8rem;
+    padding: 1rem 1.3rem;
+    display: block;
+    min-width: 25rem;
+    width: 100%;
+    border-radius: .2rem;
+    border: .2rem solid $light-gray-color;
+    transition: all .2s ease-in-out;
+    
+    &:focus {
+      outline: none;
+      border: .2rem solid $safe-color;
+    }
+    
+    &:focus:invalid {
+      border: .2rem solid $danger-color;
+    }
+  }
+
+  label {
+    display: inline-block;
+    font-size: 1.4rem;
+    color: gray;
+    margin-left: 1rem;
+    padding: 0 .5rem;
+    background-color: white;
+    transform: translateY(-6.2rem);
+    transition: all .3s ease-in-out;
+  }
+  
+  input:placeholder-shown + label {
+    background-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-3.5rem);
+  }
+
+}

@@ -54,20 +54,9 @@
 .cv {
   background: white;
   box-shadow: $box-shadow;
-  // border: 2px $primary-color solid;
   border-radius: 5px;
   padding: 10rem;
   padding-bottom: 25rem;
   position: relative;
   min-height: 80vh;
-
-  &:after {
-    content: '';
-    background: $primary-color;
-    height: 4rem;
-    width: 100%;
-    bottom: 7rem;
-    left: 0;
-    position: absolute;
-  }
 }

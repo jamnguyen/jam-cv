@@ -14,6 +14,7 @@ export default class CvModel {
   email;
   experiences;
   first_name;
+  full_name
   git_url;
   id;
   interest;
@@ -30,11 +31,12 @@ export default class CvModel {
       this.about = '';
       this.address = '';
       this.avatar = '';
-      this.dob = new Date();
+      this.dob = '2001-05-27';
       this.educations = [new EducationModel()];
       this.email = '';
       this.experiences = [new ExperienceModel()];
       this.first_name = '';
+      this.full_name = '';
       this.git_url = '';
       this.id = null;
       this.interest = [];
@@ -49,9 +51,10 @@ export default class CvModel {
       this.about = data.about;
       this.address = data.address;
       this.avatar = data.avatar;
-      this.dob = data.dob ? new Date(data.dob) : null;
+      this.dob = data.dob;
       this.email = data.email;
       this.first_name = data.first_name;
+      this.full_name = data.full_name;
       this.git_url = data.git_url;
       this.id = data.id;
       this.interest = data.interest || [];
@@ -96,9 +99,10 @@ export default class CvModel {
     this.about = data.about;
     this.address = data.address;
     this.avatar = data.avatar;
-    this.dob = data.dob ? new Date(data.dob) : null;
+    this.dob = data.dob;
     this.email = data.email;
     this.first_name = data.first_name;
+    this.full_name = data.full_name;
     this.git_url = data.git_url;
     this.id = data.id;
     this.interest = data.interest || [];

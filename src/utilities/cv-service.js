@@ -7,7 +7,6 @@ class CvService {
     return new Promise((resolve, reject) => {
       firestore.collection('users').doc(cvId).get().then(doc => {
         const newCv = new CvModel({...doc.data(), id: doc.id});
-        console.log('static new cv', newCv)
         resolve(newCv);
       }, error => {
         reject(error);
