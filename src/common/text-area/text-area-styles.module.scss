@@ -5,10 +5,12 @@
   margin-bottom: 3rem;
   position: relative;
 
-  input {
+  textarea {
+    resize: none;
     font-size: 1.8rem;
     padding: 1rem 1.3rem;
     display: block;
+    height: 20rem;
     width: 100%;
     border-radius: .2rem;
     border: .2rem solid $light-gray-color;
@@ -22,11 +24,6 @@
     &:invalid {
       border: .2rem solid $danger-color;
     }
-
-    &:disabled {
-      background: none;
-      border: .2rem solid transparent;
-    }
   }
 
   label {
@@ -35,13 +32,13 @@
     color: gray;
     margin-left: 1rem;
     padding: 0 .5rem;
-    background-color: white;
     position: absolute;
     top: -1.2rem;
+    background-color: white;
     transition: all .3s ease-in-out;
   }
   
-  input:placeholder-shown + label {
+  textarea:placeholder-shown + label {
     background-color: transparent;
     opacity: 0;
     visibility: hidden;

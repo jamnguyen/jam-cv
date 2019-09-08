@@ -1,7 +1,9 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTimesCircle as faTimesCircleRegular,
-  faCopyright
+  faCopyright,
+  faTrashAlt,
+  faEdit
 } from '@fortawesome/free-regular-svg-icons';
 import {
   faEnvelope,
@@ -13,11 +15,13 @@ import {
   faTimes,
   faTimesCircle as faTimesCircleSolid,
   faAngleRight,
-  faBirthdayCake
+  faBirthdayCake,
+  faPlus,
+  faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
-  faSkype
+  faSkype,
 } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
@@ -34,5 +38,9 @@ library.add(
   faBirthdayCake,
   faGithub,
   faSkype,
-  faCopyright
+  faCopyright,
+  faPlus,
+  faCheck,
+  faTrashAlt,
+  faEdit
 );

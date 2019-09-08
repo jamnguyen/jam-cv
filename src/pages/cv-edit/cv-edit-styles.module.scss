@@ -11,6 +11,16 @@
   min-height: 80vh;
 }
 
+.section {
+
+  &:not(:last-child) {
+    border-bottom: 2px dashed $light-gray-color;
+    margin-bottom: 4rem;
+  }
+
+}
+
+
 .message {
   color: white;
   font-size: 2.5rem;
