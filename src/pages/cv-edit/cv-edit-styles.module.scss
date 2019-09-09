@@ -15,6 +15,7 @@
 
   &:not(:last-child) {
     border-bottom: 2px dashed $light-gray-color;
+    padding-bottom: 2rem;
     margin-bottom: 4rem;
   }
 

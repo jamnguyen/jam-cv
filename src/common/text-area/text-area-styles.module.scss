@@ -24,6 +24,11 @@
     &:invalid {
       border: .2rem solid $danger-color;
     }
+
+    &:disabled {
+      background: none;
+      border: .2rem solid transparent;
+    }
   }
 
   label {

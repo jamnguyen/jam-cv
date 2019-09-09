@@ -13,7 +13,7 @@ export default class ExperienceModel {
       this.company = '';
       this.from = '2001-05-27';
       this.position = '';
-      this.to = 'now';
+      this.to = '';
       this.work = '';
     } else {
       this.company = data.company;
@@ -29,6 +29,6 @@ export default class ExperienceModel {
   }
 
   get toInFormat() {
-    return this.to.toLowerCase() === 'now' ? 'Now' : Helper.formatDate(this.to);
+    return (!this.to || this.to.toLowerCase() === 'now') ? 'Now' : Helper.formatDate(this.to);
   }
 }

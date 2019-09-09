@@ -11,7 +11,7 @@ export default class EducationModel {
       this.institution = '';
       this.major = '';
       this.from = '2001-05-27';
-      this.to = 'now';
+      this.to = '';
     } else {
       this.institution = data.institution;
       this.major = data.major;
@@ -25,6 +25,6 @@ export default class EducationModel {
   }
 
   get toInFormat() {
-    return this.to.toLowerCase() === 'now' ? 'Now' : Helper.formatDate(this.to);
+    return (!this.to || this.to.toLowerCase() === 'now') ? 'Now' : Helper.formatDate(this.to);
   }
 }

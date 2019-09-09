@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './education-item-styles.module.scss';
-import { TextInput, ButtonInline } from '../../../common';
+import styles from './experience-item-styles.module.scss';
+import { TextInput, ButtonInline, TextArea } from '../../../common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const EducationItem = (props) => {
+const ExperienceItem = (props) => {
 
-  const { institution, major, from, to } = props.data;
+  const { company, position, from, to, work } = props.data;
   const { onChange, onAdd, onDelete, index, initStatus } = props;
   const [status, setStatus] = React.useState(initStatus);
 
@@ -20,19 +20,19 @@ const EducationItem = (props) => {
       }
       <TextInput
         className="col-25 pr-s"
-        label="Institution"
-        value={ institution }
-        name="institution"
-        id={ `edu-${index}-institution` }
+        label="Company"
+        value={ company }
+        name="company"
+        id={ `exp-${index}-company` }
         type="text"
         onChange={ onChange }
       />
       <TextInput
         className="col-30 pl-s pr-s"
-        label="Major"
-        value={ major }
-        name="major"
-        id={ `edu-${index}-major` }
+        label="Position"
+        value={ position }
+        name="position"
+        id={ `exp-${index}-position` }
         type="text"
         onChange={ onChange }
       />
@@ -41,7 +41,7 @@ const EducationItem = (props) => {
         label="From"
         value={ from }
         name="from"
-        id={ `edu-${index}-from` }
+        id={ `exp-${index}-from` }
         type="date"
         onChange={ onChange }
       />
@@ -50,7 +50,7 @@ const EducationItem = (props) => {
         label="To"
         value={ to }
         name="to"
-        id={ `edu-${index}-to` }
+        id={ `exp-${index}-to` }
         type="date"
         onChange={ onChange }
         title="Leave empty for 'Now' value"
@@ -68,8 +68,17 @@ const EducationItem = (props) => {
         )
       }
       </span>
+      <TextArea
+        className="col-90 pr-s"
+        label="Work Description"
+        value={ work }
+        name="work"
+        id={ `exp-${index}-work` }
+        onChange={ onChange }
+        inputStyles={{ height: '10rem' }}
+      />
     </div>
   );
 }
 
-export default EducationItem;
+export default ExperienceItem;

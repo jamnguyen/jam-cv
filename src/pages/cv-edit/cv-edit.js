@@ -5,7 +5,8 @@ import { useSettings } from '../../context/settings-provider';
 import Title from './title/title';
 import { TextInput, Button, TextArea } from '../../common';
 import EducationItem from './education-item/education-item';
-import { EducationModel } from '../../models';
+import { EducationModel, ExperienceModel } from '../../models';
+import ExperienceItem from './experience-item/experience-item';
 
 const CvEdit = (props) => {
 
@@ -25,7 +26,8 @@ const CvEdit = (props) => {
         if (!showHeadFooter) setShowHeadFooter(true);
         // Setup temp
         setTemp({
-          edu: new EducationModel()
+          edu: new EducationModel(),
+          exp: new ExperienceModel()
         });
       } catch (err) {
       }
@@ -59,6 +61,9 @@ const CvEdit = (props) => {
     });
   }
 
+  // ------------------------------------------------------------------------------------
+  // EDUCATION
+  // ------------------------------------------------------------------------------------
   const onEduChange = (index, event) => {
     event.preventDefault();
     let { educations } = cv;
@@ -68,10 +73,6 @@ const CvEdit = (props) => {
       ...cv,
       educations
     });
-  }
-
-  const onSaveEdu = (edu) => {
-    // Do nothing
   }
 
   const onAddEdu = (edu) => {
@@ -102,17 +103,16 @@ const CvEdit = (props) => {
           cv.educations.map((edu, index) => {
             return <EducationItem
                       key={ `edu-${index}` }
-                      id={ `edu-${index}` }
+                      index={ index }
                       data={ edu }
                       onChange={ (e) => onEduChange(index, e) }
-                      onSave={ () => onSaveEdu(edu) }
                       onDelete={ () => onDeleteEdu(index) }
-                      initStatus="read-only"
+                      initStatus="edit"
                     />
           })
         }
         <EducationItem
-          id={ `edu-add` }
+          index={ -1 }
           data={ temp.edu }
           onChange={ (e) => onTempInputChange('edu', e) }
           onAdd={ () => onAddEdu(temp.edu) }
@@ -121,6 +121,68 @@ const CvEdit = (props) => {
       </React.Fragment>
     );
   }
+
+  // ------------------------------------------------------------------------------------
+  // EXPERIENCE
+  // ------------------------------------------------------------------------------------
+  const onExpChange = (index, event) => {
+    event.preventDefault();
+    let { experiences } = cv;
+    experiences[index][event.target.name] = event.target.value;
+
+    setCv({
+      ...cv,
+      experiences
+    });
+  }
+
+  const onAddExp = (exp) => {
+    setCv({
+      ...cv,
+      experiences: [...cv.experiences, exp]
+    });
+
+    setTemp({
+      ...temp,
+      exp: new ExperienceModel()
+    });
+  }
+
+  const onDeleteExp = (index) => {
+    let newExps = [...cv.experiences];
+    newExps.splice(index, 1);
+    setCv({
+      ...cv,
+      experiences: newExps
+    });
+  }
+
+  const expJsx = () => {
+    return (
+      <React.Fragment>
+        {
+          cv.experiences.map((exp, index) => {
+            return <ExperienceItem
+                      key={ `exp-${index}` }
+                      index={ index }
+                      data={ exp }
+                      onChange={ (e) => onExpChange(index, e) }
+                      onDelete={ () => onDeleteExp(index) }
+                      initStatus="edit"
+                    />
+          })
+        }
+        <ExperienceItem
+          index={ -1 }
+          data={ temp.exp }
+          onChange={ (e) => onTempInputChange('exp', e) }
+          onAdd={ () => onAddExp(temp.exp) }
+          initStatus="add"
+        />
+      </React.Fragment>
+    );
+  }
+
 
   if (isLoading) {
     return null;
@@ -154,6 +216,7 @@ const CvEdit = (props) => {
           </div>
           <div className={ `${styles.section}` }>
             <Title text="experience" />
+            { expJsx() }
           </div>
           {/* interest */}
           <Button type="submit" title="Save" />

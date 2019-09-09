@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './home-styles.module.scss';
 import { Button } from '../../common';
 import { useSettings } from '../../context/settings-provider';
-import { useUser } from '../../context/user-provider';
 
 const Home = (props) => {
 

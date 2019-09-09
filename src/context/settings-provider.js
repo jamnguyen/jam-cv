@@ -6,9 +6,7 @@ const SettingsProvider = (props) => {
   const [headerTitle, setHeaderTitle] = React.useState('Jam CV');
   const [showHeadFooter, setShowHeadFooter] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [firstTimeLoading, setLoadingFirstTime] = React.useState(true);
-
-  const setFirstTimeLoading = (value) => { console.log('first time', value); setLoadingFirstTime(value) }
+  const [firstTimeLoading, setFirstTimeLoading] = React.useState(true);
 
   const settingsValue = {
     headerTitle,
