@@ -14,7 +14,7 @@
 .section {
 
   &:not(:last-child) {
-    border-bottom: 2px dashed $light-gray-color;
+    border-bottom: 2px dashed gray;
     padding-bottom: 2rem;
     margin-bottom: 4rem;
   }

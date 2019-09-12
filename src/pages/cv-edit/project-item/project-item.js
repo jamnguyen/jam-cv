@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './experience-item-styles.module.scss';
+import styles from './project-item-styles.module.scss';
 import { TextInput, ButtonInline, TextArea } from '../../../common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ExperienceItem = (props) => {
+const ProjectItem = (props) => {
 
-  const { company, position, from, to, work } = props.data;
+  const { business_domain, description, name, work, technology } = props.data;
   const { onChange, onAdd, onDelete, index, initStatus } = props;
   const [status, setStatus] = React.useState(initStatus);
 
@@ -19,41 +19,22 @@ const ExperienceItem = (props) => {
         index >= 0 ? <div className={`${styles.order}`}>#{ index + 1 }</div> : null
       }
       <TextInput
-        className="col-25 pr-s"
-        label="Company"
-        value={ company }
-        name="company"
-        id={ `exp-${index}-company` }
+        className="col-50 pr-s"
+        label="Name"
+        value={ name }
+        name="name"
+        id={ `project-${index}-name` }
         type="text"
         onChange={ onChange }
       />
       <TextInput
-        className="col-30 pl-s pr-s"
-        label="Position"
-        value={ position }
-        name="position"
-        id={ `exp-${index}-position` }
+        className="col-45 pl-s pr-s"
+        label="Business Domain"
+        value={ business_domain }
+        name="business_domain"
+        id={ `project-${index}-business-domain` }
         type="text"
         onChange={ onChange }
-      />
-      <TextInput
-        className="col-20 pl-s pr-s"
-        label="From"
-        value={ from }
-        name="from"
-        id={ `exp-${index}-from` }
-        type="date"
-        onChange={ onChange }
-      />
-      <TextInput
-        className="col-20 pl-s pr-s"
-        label="To"
-        value={ to }
-        name="to"
-        id={ `exp-${index}-to` }
-        type="date"
-        onChange={ onChange }
-        title="Leave empty for 'Now' value"
       />
       <span className="col-5 pl-s">
       {
@@ -68,9 +49,27 @@ const ExperienceItem = (props) => {
         )
       }
       </span>
+      <TextInput
+        className="col-50 pr-s"
+        label="Description"
+        value={ description }
+        name="description"
+        id={ `project-${index}-description` }
+        type="text"
+        onChange={ onChange }
+      />
+      <TextInput
+        className="col-45 pl-s pr-s"
+        label="Technology"
+        value={ technology }
+        name="technology"
+        id={ `project-${index}-technology` }
+        type="text"
+        onChange={ onChange }
+      />
       <TextArea
         className="col-95 pr-s"
-        label="Work Description"
+        label="Your Work"
         value={ work }
         name="work"
         id={ `exp-${index}-work` }
@@ -81,4 +80,4 @@ const ExperienceItem = (props) => {
   );
 }
 
-export default ExperienceItem;
+export default ProjectItem;

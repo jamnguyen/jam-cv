@@ -14,7 +14,7 @@ const EducationItem = (props) => {
   }
 
   return (
-    <div className={`${styles.container} row mb-s`}>
+    <div className={`${styles.container} ${status === 'add' ? styles.topDivider : ''} row mb-s`}>
       {
         index >= 0 ? <div className={`${styles.order}`}>#{ index + 1 }</div> : null
       }

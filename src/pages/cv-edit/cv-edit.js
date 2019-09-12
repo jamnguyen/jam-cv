@@ -5,8 +5,9 @@ import { useSettings } from '../../context/settings-provider';
 import Title from './title/title';
 import { TextInput, Button, TextArea } from '../../common';
 import EducationItem from './education-item/education-item';
-import { EducationModel, ExperienceModel } from '../../models';
+import { EducationModel, ExperienceModel, ProjectModel } from '../../models';
 import ExperienceItem from './experience-item/experience-item';
+import ProjectItem from './project-item/project-item';
 
 const CvEdit = (props) => {
 
@@ -27,7 +28,8 @@ const CvEdit = (props) => {
         // Setup temp
         setTemp({
           edu: new EducationModel(),
-          exp: new ExperienceModel()
+          exp: new ExperienceModel(),
+          proj: new ProjectModel()
         });
       } catch (err) {
       }
@@ -183,6 +185,67 @@ const CvEdit = (props) => {
     );
   }
 
+  // ------------------------------------------------------------------------------------
+  // Projects
+  // ------------------------------------------------------------------------------------
+  const onProjChange = (index, event) => {
+    event.preventDefault();
+    let { projects } = cv;
+    projects[index][event.target.name] = event.target.value;
+
+    setCv({
+      ...cv,
+      projects
+    });
+  }
+
+  const onAddProj = (proj) => {
+    setCv({
+      ...cv,
+      projects: [...cv.projects, proj]
+    });
+
+    setTemp({
+      ...temp,
+      proj: new ProjectModel()
+    });
+  }
+
+  const onDeleteProj = (index) => {
+    let newProjs = [...cv.projects];
+    newProjs.splice(index, 1);
+    setCv({
+      ...cv,
+      projects: newProjs
+    });
+  }
+
+  const projectJsx = () => {
+    return (
+      <React.Fragment>
+        {
+          cv.projects.map((proj, index) => {
+            return <ProjectItem
+                      key={ `proj-${index}` }
+                      index={ index }
+                      data={ proj }
+                      onChange={ (e) => onProjChange(index, e) }
+                      onDelete={ () => onDeleteProj(index) }
+                      initStatus="edit"
+                    />
+          })
+        }
+        <ProjectItem
+          index={ -1 }
+          data={ temp.proj }
+          onChange={ (e) => onTempInputChange('proj', e) }
+          onAdd={ () => onAddProj(temp.proj) }
+          initStatus="add"
+        />
+      </React.Fragment>
+    );
+  }
+
 
   if (isLoading) {
     return null;
@@ -217,6 +280,10 @@ const CvEdit = (props) => {
           <div className={ `${styles.section}` }>
             <Title text="experience" />
             { expJsx() }
+          </div>
+          <div className={ `${styles.section}` }>
+            <Title text="projects" />
+            { projectJsx() }
           </div>
           {/* interest */}
           <Button type="submit" title="Save" />
