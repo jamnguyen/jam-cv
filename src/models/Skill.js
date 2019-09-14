@@ -6,8 +6,8 @@ export default class SkillModel {
   constructor(data) {
     if (!data) {
       this.name = '';
-      this.level = '';
-      this.max = '';
+      this.level = 0;
+      this.max = 10;
     } else {
       this.name = data.name;
       this.level = data.level;

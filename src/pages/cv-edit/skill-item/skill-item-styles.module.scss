@@ -17,6 +17,16 @@
     font-style: italic;
     font-weight: 700;
   }
+
+  .progressBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    height: 3rem;
+    width: 100%;
+    font-weight: 500;
+  }
 }
 
 .topDivider {

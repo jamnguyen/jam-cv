@@ -5,9 +5,10 @@ import { useSettings } from '../../context/settings-provider';
 import Title from './title/title';
 import { TextInput, Button, TextArea } from '../../common';
 import EducationItem from './education-item/education-item';
-import { EducationModel, ExperienceModel, ProjectModel } from '../../models';
+import { EducationModel, ExperienceModel, ProjectModel, SkillModel } from '../../models';
 import ExperienceItem from './experience-item/experience-item';
 import ProjectItem from './project-item/project-item';
+import SkillItem from './skill-item/skill-item';
 
 const CvEdit = (props) => {
 
@@ -29,7 +30,8 @@ const CvEdit = (props) => {
         setTemp({
           edu: new EducationModel(),
           exp: new ExperienceModel(),
-          proj: new ProjectModel()
+          proj: new ProjectModel(),
+          skill: new SkillModel()
         });
       } catch (err) {
       }
@@ -61,6 +63,89 @@ const CvEdit = (props) => {
       ...temp,
       [property]: prop
     });
+  }
+
+  // ------------------------------------------------------------------------------------
+  // Skills
+  // ------------------------------------------------------------------------------------
+  const onSkillChange = (index, value) => {
+    let { skills } = cv;
+    skills[index]['level'] = value;
+
+    setCv({
+      ...cv,
+      skills
+    });
+  }
+
+  const onSkillInputChange = (index, event) => {
+    event.preventDefault();
+    let { skills } = cv;
+    skills[index][event.target.name] = event.target.value;
+
+    setCv({
+      ...cv,
+      skills
+    });
+  }
+
+  const onTempSkillChange = (index, value) => {
+    let { skill } = temp;
+    skill.level = value;
+
+    setTemp({
+      ...temp,
+      skill
+    });
+  }
+
+  const onAddSkill = (skill) => {
+    setCv({
+      ...cv,
+      skills: [...cv.skills, skill]
+    });
+
+    setTemp({
+      ...temp,
+      skill: new SkillModel()
+    });
+  }
+
+  const onDeleteSkill = (index) => {
+    let newSkills = [...cv.skills];
+    newSkills.splice(index, 1);
+    setCv({
+      ...cv,
+      skills: newSkills
+    });
+  }
+
+  const skillsJsx = () => {
+    return (
+      <React.Fragment>
+        {
+          cv.skills.map((skill, index) => {
+            return <SkillItem
+                      key={ `skill-${index}` }
+                      index={ index }
+                      data={ skill }
+                      onInputChange={ (e) => onSkillInputChange(index, e) }
+                      onChange={ onSkillChange }
+                      onDelete={ () => onDeleteSkill(index) }
+                      initStatus="edit"
+                    />
+          })
+        }
+        <SkillItem
+          index={ -1 }
+          data={ temp.skill }
+          onInputChange={ (e) => onTempInputChange('skill', e) }
+          onChange={ onTempSkillChange }
+          onAdd={ () => onAddSkill(temp.skill) }
+          initStatus="add"
+        />
+      </React.Fragment>
+    );
   }
 
   // ------------------------------------------------------------------------------------
@@ -272,6 +357,10 @@ const CvEdit = (props) => {
               <TextInput className="col-50 pl-s" label="Github URL" value={ cv.git_url } name="git_url" type="text" onChange={ onInputChange } />
             </div>
             <TextArea label="Description" value={ cv.about } name="about" onChange={ onInputChange } required  />
+          </div>
+          <div className={ `${styles.section}` }>
+            <Title text="skills" />
+            { skillsJsx() }
           </div>
           <div className={ `${styles.section}` }>
             <Title text="education" />

@@ -3,32 +3,40 @@ import buttonStyles from './button-inline-styles.module.scss';
 import { CSS_CONFIG } from '../../Constants';
 
 const ButtonInline = (props) => {
-  const { type, onClick, styles, className, title } = props;
+  const { type, onClick, styles, className, title, outline } = props;
 
   const color = props.color || CSS_CONFIG.PRIMARY_COLOR;
-
-  let backgroundStyle = {
-    backgroundColor: color
-  }
-
-  if (color === 'lightgray' || color === 'white') {
-    backgroundStyle = {
-      ...backgroundStyle,
-      color: 'black'
+  let dynamicStyle;
+  
+  if (!outline) {
+    dynamicStyle = {
+      backgroundColor: color
+    }
+    if (color === 'lightgray' || color === 'white') {
+      dynamicStyle = {
+        ...dynamicStyle,
+        color: 'black'
+      }
+    } else {
+      dynamicStyle = {
+        ...dynamicStyle,
+        color: 'white'
+      }
     }
   } else {
-    backgroundStyle = {
-      ...backgroundStyle,
-      color: 'white'
+    dynamicStyle = {
+      backgroundColor: 'transparent',
+      borderColor: color,
+      color
     }
   }
 
   return (
     <button
-      className={ `${buttonStyles.button} ${className}` }
+      className={ `${buttonStyles.button} ${className || ''}` }
       type={ type || 'button' }
       onClick={ onClick }
-      style={{...styles, ...backgroundStyle}}
+      style={{...styles, ...dynamicStyle}}
     >{ title }</button>
   );
 }
