@@ -18,7 +18,8 @@ import {
   faBirthdayCake,
   faPlus,
   faMinus,
-  faCheck
+  faCheck,
+  faCompactDisc
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
@@ -44,5 +45,6 @@ library.add(
   faMinus,
   faCheck,
   faTrashAlt,
-  faEdit
+  faEdit,
+  faCompactDisc
 );

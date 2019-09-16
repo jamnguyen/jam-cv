@@ -47,7 +47,7 @@ const EducationItem = (props) => {
       />
       <TextInput
         className="col-20 pl-s pr-s"
-        label="To"
+        label="To (empty = Now)"
         value={ to }
         name="to"
         id={ `edu-${index}-to` }

@@ -19,6 +19,7 @@ export default class CvModel {
   id;
   interest;
   last_name;
+  owner;
   phone;
   pob;
   projects;
@@ -26,25 +27,27 @@ export default class CvModel {
   skype;
   title;
 
-  constructor(data) {
+  constructor(data, user = null) {
     if (!data) {
       this.about = '';
       this.address = '';
       this.avatar = '';
       this.dob = '2001-05-27';
-      this.educations = [new EducationModel()];
+      this.educations = [];
       this.email = '';
-      this.experiences = [new ExperienceModel()];
+      this.experiences = [];
       this.first_name = '';
       this.full_name = '';
       this.git_url = '';
       this.id = null;
-      this.interest = [];
+      this.interest = '';
       this.last_name = '';
+      this.owner = user ? user.uid : null;
       this.phone = '';
       this.pob = '';
-      this.projects = [new ProjectModel()];
-      this.skills = [new SkillModel()];
+      this.projects = [];
+      this.published = false;
+      this.skills = [];
       this.skype = '';
       this.title = '';
     } else {
@@ -57,8 +60,9 @@ export default class CvModel {
       this.full_name = data.full_name;
       this.git_url = data.git_url;
       this.id = data.id;
-      this.interest = data.interest || [];
+      this.interest = data.interest || '';
       this.last_name = data.last_name;
+      this.owner = data.owner;
       this.phone = data.phone;
       this.pob = data.pob;
       this.published = data.published;
@@ -105,8 +109,9 @@ export default class CvModel {
     this.full_name = data.full_name;
     this.git_url = data.git_url;
     this.id = data.id;
-    this.interest = data.interest || [];
+    this.interest = data.interest || '';
     this.last_name = data.last_name;
+    this.owner = data.owner;
     this.phone = data.phone;
     this.pob = data.pob;
     this.published = data.published;
@@ -144,6 +149,17 @@ export default class CvModel {
 
   getBirthDate(format = DATE_FORMAT.YYYY_MM_DD__DOT) {
     return Helper.formatDate(this.dob, format);
+  }
+
+  get interestArray() {
+    return this.interest.split(',');
+  }
+
+  static standardizeData(cv) {
+    let result = { ...cv };
+    delete result.id;
+
+    return Helper.getPlainObject(result);
   }
 
 }

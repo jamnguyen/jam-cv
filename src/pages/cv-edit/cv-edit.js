@@ -5,45 +5,86 @@ import { useSettings } from '../../context/settings-provider';
 import Title from './title/title';
 import { TextInput, Button, TextArea } from '../../common';
 import EducationItem from './education-item/education-item';
-import { EducationModel, ExperienceModel, ProjectModel, SkillModel } from '../../models';
+import { EducationModel, ExperienceModel, ProjectModel, SkillModel, CvModel } from '../../models';
 import ExperienceItem from './experience-item/experience-item';
 import ProjectItem from './project-item/project-item';
 import SkillItem from './skill-item/skill-item';
+import { useUser } from '../../context/user-provider';
 
 const CvEdit = (props) => {
 
   const id = props.match.params.cvId;
+  const isCreating = props.match.url.includes('create');
   const [cv, setCv] = React.useState();
   const [temp, setTemp] = React.useState({});
+  const [saving, setSaving] = React.useState(false);
+  const [publishing, setPublishing] = React.useState(false);
   const { isLoading, setIsLoading, showHeadFooter, setShowHeadFooter, setHeaderTitle } = useSettings();
+  const user = useUser();
 
   React.useLayoutEffect(() => {
-    setIsLoading(true);   // For full page loading component
-    
-    const getCv = async () => {
-      try {
-        const result = await CvService.getCv(id);
-        setCv(result);
-        setHeaderTitle('Edit CV');
-        if (!showHeadFooter) setShowHeadFooter(true);
-        // Setup temp
-        setTemp({
-          edu: new EducationModel(),
-          exp: new ExperienceModel(),
-          proj: new ProjectModel(),
-          skill: new SkillModel()
-        });
-      } catch (err) {
+    if (!isCreating) {
+      
+      const getCv = async () => {
+        setIsLoading(true);   // For full page loading component
+        try {
+          const result = await CvService.getCv(id);
+          setCv(result);
+          setHeaderTitle('Edit CV');
+          setIsLoading(false);
+        } catch (err) {
+          setIsLoading(false);
+        }
       }
-      setIsLoading(false);
+      
+      getCv();
+    } else {
+      setCv(new CvModel(null, user));
+      setHeaderTitle('Create CV');
     }
-
-    getCv();
+    
+    if (!showHeadFooter) setShowHeadFooter(true);
+    // Setup temp
+    setTemp({
+      edu: new EducationModel(),
+      exp: new ExperienceModel(),
+      proj: new ProjectModel(),
+      skill: new SkillModel()
+    });
   }, [id]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(cv);
+
+    const add = async () => {
+      setSaving(true);
+      try {
+        const result = await CvService.addCv(cv);
+        console.log('added', result)
+        props.history.push(`/edit/${result.id}`);
+        setSaving(false);
+      } catch(error) {
+        console.log(error);
+        setSaving(false);
+      }
+    }
+    const update = async () => {
+      setSaving(true);
+      try {
+        const result = await CvService.saveCv(cv);
+        setSaving(false);
+        console.log('Saved', result);
+      } catch(error) {
+        console.log(error);
+        setSaving(false);
+      }
+    }
+
+    if (isCreating) {
+      add();
+    } else {
+      update();
+    }
   }
 
   const onInputChange = (event) => {
@@ -54,15 +95,40 @@ const CvEdit = (props) => {
     });
   }
 
-  const onTempInputChange = (property, event) => {
+  const onTempInputChange = (property, event, isPrimitive = false) => {
     event.preventDefault();
-    let prop = temp[property];
-    prop[event.target.name] = event.target.value;
+    if (!isPrimitive) {
+      let prop = temp[property];
+      prop[event.target.name] = event.target.value;
+  
+      setTemp({
+        ...temp,
+        [property]: prop
+      });
+    } else {
+        setTemp({
+          ...temp,
+          [property]: event.target.value
+        });
+    }
+  }
 
-    setTemp({
-      ...temp,
-      [property]: prop
-    });
+  const publish = (event) => {
+    event.preventDefault();
+
+    const patch = async () => {
+      setPublishing(true);
+      try {
+        const result = await CvService.patchCv(cv.id, { published: !cv.published });
+        setCv({ ...cv, published: !cv.published });
+        setPublishing(false);
+      } catch(error) {
+        console.log(error);
+        setPublishing(false);
+      }
+    }
+
+    patch();
   }
 
   // ------------------------------------------------------------------------------------
@@ -340,6 +406,15 @@ const CvEdit = (props) => {
     return (
       <div className={ `${styles.container} page-container mt-x` }>
         <form onSubmit={ onSubmit }>
+          {
+            user ?
+              <div className={`row row-justify-end ${styles.actionBar}`}>
+                <Button saving={ saving } type="submit" title="Save" />
+                <Button saving={ publishing } className={`ml-s`} onClick={ (e) => { publish(e) } } title={ cv.published ? 'Unpublish' : 'Publish' } />
+                <Button className={`ml-s`} onClick={ () => { props.history.push(`/view/${cv.id}`) } } title="View" />
+              </div> :
+              null
+          }
           <div className={ `${styles.section}` }>
             <Title text="general information" />
             <div className={`row`}>
@@ -357,6 +432,7 @@ const CvEdit = (props) => {
               <TextInput className="col-50 pl-s" label="Github URL" value={ cv.git_url } name="git_url" type="text" onChange={ onInputChange } />
             </div>
             <TextArea label="Description" value={ cv.about } name="about" onChange={ onInputChange } required  />
+            <TextInput label="Interest (separate by commas)" value={ cv.interest } name="interest" type="text" onChange={ onInputChange } />
           </div>
           <div className={ `${styles.section}` }>
             <Title text="skills" />
@@ -374,8 +450,6 @@ const CvEdit = (props) => {
             <Title text="projects" />
             { projectJsx() }
           </div>
-          {/* interest */}
-          <Button type="submit" title="Save" />
         </form>
       </div>
     );

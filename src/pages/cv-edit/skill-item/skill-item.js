@@ -47,7 +47,7 @@ const SkillItem = (props) => {
         />
         <span className="col-5">
           <ButtonInline
-            color="gray"
+            color="lightgray"
             outline
             title={<FontAwesomeIcon icon={['fas', 'minus']} fixedWidth />}
             onClick={ () => addPoint(-1) }
@@ -61,7 +61,7 @@ const SkillItem = (props) => {
         </span>
         <span className="col-5">
           <ButtonInline
-            color="gray"
+            color="lightgray"
             outline
             title={<FontAwesomeIcon icon={['fas', 'plus']} fixedWidth />}
             onClick={ () => addPoint(1) }

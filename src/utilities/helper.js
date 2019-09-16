@@ -85,4 +85,8 @@ export default class Helper {
   //   return srcObject;
   // }
 
+  static getPlainObject(object) {
+    return JSON.parse(JSON.stringify(object));
+  }
+
 }

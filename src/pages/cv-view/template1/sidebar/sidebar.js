@@ -6,7 +6,8 @@ import CvProgressBar from '../progress-bar/progress-bar';
 
 const CvSidebar = (props) => {
 
-  const { skills, interest } = props.cv;
+  const { skills } = props.cv;
+  const interests = props.cv.interestArray;
 
   const getSkillsContent = () => {
     return skills.map((skill, index) => {
@@ -23,9 +24,9 @@ const CvSidebar = (props) => {
   }
 
   const getInterestContent = () => {
-    return interest.map((item, index) => {
+    return interests.map((item, index) => {
       return (
-        <span key={ `interest-${index}` } className={ styles.interestItem }>{ `#${item}` }</span>
+        item ? <span key={ `interest-${index}` } className={ styles.interestItem }>{ `#${item}` }</span> : null
       );
     });
   }

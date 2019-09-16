@@ -17,10 +17,9 @@
     &:focus {
       outline: none;
       border: .2rem solid $safe-color;
-    }
-    
-    &:invalid {
-      border: .2rem solid $danger-color;
+      &:invalid {
+        border: .2rem solid $danger-color;
+      }
     }
 
     &:disabled {

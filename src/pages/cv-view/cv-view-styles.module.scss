@@ -2,6 +2,14 @@
 
 .container {
   padding-bottom: 15rem;
+
+  .actionBar {
+    margin-bottom: 2rem;
+
+    button {
+      font-size: 1.6rem;
+    }
+  }
 }
 
 .message {
