@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styles from './unauthenticated-app-styles.module.scss';
 import { Header, Footer } from '../../common';
 import SignIn from '../sign-in/sign-in';

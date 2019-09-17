@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styles from './authenticated-app-styles.module.scss';
 import { Header, Footer } from '../../common';
 import CvEdit from '../cv-edit/cv-edit';

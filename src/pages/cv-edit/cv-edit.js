@@ -417,7 +417,7 @@ const CvEdit = (props) => {
             cv.published ?
               <div className={`row row-justify-space-between mb-x ${styles.publicUrl}`}>
                 <span className={`${styles.title}`}>Your CV was published on:</span>
-                <span>{ `${window.location.origin}/view/${cv.id}` }</span>
+                <span>{ `${window.location.origin}${window.location.pathname}#/view/${cv.id}` }</span>
               </div> :
               null
           }
