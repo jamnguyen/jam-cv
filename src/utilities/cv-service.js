@@ -60,16 +60,6 @@ class CvService {
     });
   }
 
-  static addCv(cvData) {
-    return new Promise((resolve, reject) => {
-      firestore.collection('cvs').add(cvData).then(result => {
-        resolve(result);
-      }, error => {
-        reject(error);
-      });
-    });
-  }
-
 }
 
 export default CvService;

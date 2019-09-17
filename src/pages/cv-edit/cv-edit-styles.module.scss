@@ -13,7 +13,7 @@
 
   &:after {
     content: '';
-    background: $primary-color;
+    background: $primary-dark-color;
     height: 4rem;
     width: 100%;
     bottom: 7rem;
@@ -28,6 +28,18 @@
 
     button {
       font-size: 1.6rem;
+    }
+  }
+
+  .publicUrl {
+    padding: 3rem;
+    border: 2px dashed $safe-color;
+    border-radius: .5rem;
+    font-size: 2rem;
+
+    .title {
+      font-weight: 700;
+      text-transform: uppercase;
     }
   }
 }

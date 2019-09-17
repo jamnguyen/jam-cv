@@ -144,6 +144,12 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.row-justify-end {
+  justify-content: flex-end;
+}
+.row-justify-space-between {
+  justify-content: space-between;
+}
 
 .col-95 {
   width: 95%;
@@ -197,10 +203,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.row-justify-end {
-  justify-content: flex-end;
 }
 
 .full-height-viewport {

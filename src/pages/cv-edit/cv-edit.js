@@ -60,7 +60,6 @@ const CvEdit = (props) => {
       setSaving(true);
       try {
         const result = await CvService.addCv(cv);
-        console.log('added', result)
         props.history.push(`/edit/${result.id}`);
         setSaving(false);
       } catch(error) {
@@ -71,9 +70,8 @@ const CvEdit = (props) => {
     const update = async () => {
       setSaving(true);
       try {
-        const result = await CvService.saveCv(cv);
+        await CvService.saveCv(cv);
         setSaving(false);
-        console.log('Saved', result);
       } catch(error) {
         console.log(error);
         setSaving(false);
@@ -119,7 +117,7 @@ const CvEdit = (props) => {
     const patch = async () => {
       setPublishing(true);
       try {
-        const result = await CvService.patchCv(cv.id, { published: !cv.published });
+        await CvService.patchCv(cv.id, { published: !cv.published });
         setCv({ ...cv, published: !cv.published });
         setPublishing(false);
       } catch(error) {
@@ -412,6 +410,14 @@ const CvEdit = (props) => {
                 <Button saving={ saving } type="submit" title="Save" />
                 <Button saving={ publishing } className={`ml-s`} onClick={ (e) => { publish(e) } } title={ cv.published ? 'Unpublish' : 'Publish' } />
                 <Button className={`ml-s`} onClick={ () => { props.history.push(`/view/${cv.id}`) } } title="View" />
+              </div> :
+              null
+          }
+          {
+            cv.published ?
+              <div className={`row row-justify-space-between mb-x ${styles.publicUrl}`}>
+                <span className={`${styles.title}`}>Your CV was published on:</span>
+                <span>{ `${window.location.origin}/view/${cv.id}` }</span>
               </div> :
               null
           }

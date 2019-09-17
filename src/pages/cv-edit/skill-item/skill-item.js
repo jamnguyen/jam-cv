@@ -8,7 +8,7 @@ const SkillItem = (props) => {
 
   const { level, max, name } = props.data;
   const { onInputChange, onChange, onAdd, onDelete, index, initStatus } = props;
-  const [status, setStatus] = React.useState(initStatus);
+  const [status] = React.useState(initStatus);
 
   const add = () => {
     onAdd(props.data);

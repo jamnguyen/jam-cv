@@ -7,7 +7,7 @@ const ProjectItem = (props) => {
 
   const { business_domain, description, name, work, technology } = props.data;
   const { onChange, onAdd, onDelete, index, initStatus } = props;
-  const [status, setStatus] = React.useState(initStatus);
+  const [status] = React.useState(initStatus);
 
   const add = () => {
     onAdd(props.data);

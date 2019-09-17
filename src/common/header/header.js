@@ -1,22 +1,28 @@
 import React from 'react';
 import styles from './header-styles.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useAuth } from '../../context/auth-provider';
 import { useUser } from '../../context/user-provider';
 import { useSettings } from '../../context/settings-provider';
 
-const Header = () => {
+const Header = (props) => {
 
   const { signOut } = useAuth();
   const user = useUser();
   const { headerTitle, showHeadFooter } = useSettings();
+
+  const onSignOut = () => {
+    signOut().then(() => {
+      props.history.push('/');
+    });
+  }
 
   const getSignInContent = () => {
     if (user) {
       return (
         <React.Fragment>
           <img src={ user.avatar } className={`${styles.userAvatar} mr-s`} alt="Avatar of user" />
-          { user.name },<button className={`${styles.menuItemBtn} ml-s`} onClick={ signOut }>sign out</button>
+          { user.name },<button className={`${styles.menuItemBtn} ml-s`} onClick={ onSignOut }>sign out</button>
         </React.Fragment>
       );
     }
@@ -42,4 +48,4 @@ const Header = () => {
   );
 }
 
-export default Header;
+export default withRouter(Header);

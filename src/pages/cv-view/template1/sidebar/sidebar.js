@@ -26,7 +26,7 @@ const CvSidebar = (props) => {
   const getInterestContent = () => {
     return interests.map((item, index) => {
       return (
-        item ? <span key={ `interest-${index}` } className={ styles.interestItem }>{ `#${item}` }</span> : null
+        item ? <span key={ `interest-${index}` } className={ styles.interestItem }>{ `#${item.trim()}` }</span> : null
       );
     });
   }
